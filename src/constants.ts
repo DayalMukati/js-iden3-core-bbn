@@ -48,7 +48,8 @@ export const Blockchain: { [k: string]: string } = {
   ZkEVM: 'zkevm',
   Unknown: 'unknown',
   NoChain: '',
-  ReadOnly: 'readonly'
+  ReadOnly: 'readonly',
+  BBN: 'bbn'
 };
 
 export const NetworkId: { [k: string]: string } = {
@@ -59,13 +60,15 @@ export const NetworkId: { [k: string]: string } = {
   Sepolia: 'sepolia',
   Test: 'test',
   Unknown: 'unknown',
-  NoNetwork: ''
+  NoNetwork: '',
+  Hyderabad: 'hyderabad'
 };
 
 export const DidMethod: { [k: string]: string } = {
   Iden3: 'iden3',
   PolygonId: 'polygonid',
-  Other: ''
+  Other: '',
+  BBNId: 'bbnid'
 };
 
 /**
@@ -80,13 +83,15 @@ export const ChainIds: { [key: string]: number } = {
   [`${Blockchain.Polygon}:${NetworkId.Mumbai}`]: 80001,
   [`${Blockchain.Polygon}:${NetworkId.Amoy}`]: 80002,
   [`${Blockchain.ZkEVM}:${NetworkId.Main}`]: 1101,
-  [`${Blockchain.ZkEVM}:${NetworkId.Test}`]: 1442
+  [`${Blockchain.ZkEVM}:${NetworkId.Test}`]: 1442,
+  [`${Blockchain.BBN}:${NetworkId.Hyderabad}`]: 2023
 };
 
 export const DidMethodByte: { [key: string]: number } = {
   [DidMethod.Iden3]: 0b00000001,
   [DidMethod.PolygonId]: 0b00000010,
-  [DidMethod.Other]: 0b11111111
+  [DidMethod.Other]: 0b11111111,
+  [DidMethod.BBN]: 0b00010110
 };
 
 const blockchainNetworkMap = {
@@ -98,7 +103,9 @@ const blockchainNetworkMap = {
   [`${Blockchain.Ethereum}:${NetworkId.Goerli}`]: 0b0010_0000 | 0b0000_0010,
   [`${Blockchain.Ethereum}:${NetworkId.Sepolia}`]: 0b0010_0000 | 0b0000_0011,
   [`${Blockchain.ZkEVM}:${NetworkId.Main}`]: 0b0011_0000 | 0b0000_0001,
-  [`${Blockchain.ZkEVM}:${NetworkId.Test}`]: 0b0011_0000 | 0b0000_0010
+  [`${Blockchain.ZkEVM}:${NetworkId.Test}`]: 0b0011_0000 | 0b0000_0010,
+  [`${Blockchain.BBN}:${NetworkId.Hyderabad}`]: 0b0100_0000 | 0b0000_0001  
+
 };
 
 // DIDMethodNetwork is map for did methods and their blockchain networks
@@ -109,6 +116,9 @@ export const DidMethodNetwork: {
     ...blockchainNetworkMap
   },
   [DidMethod.PolygonId]: {
+    ...blockchainNetworkMap
+  },
+  [DidMethod.BBNId]: {
     ...blockchainNetworkMap
   },
   [DidMethod.Other]: {
